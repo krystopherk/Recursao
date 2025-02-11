@@ -1,22 +1,19 @@
 import turtle
 
-# Função para desenhar um arco de círculo baseado na sequência de Fibonacci
-def arco_fibonacci(t, raio, angulo):
-    t.circle(raio, angulo)
+def espiral_fibonacci_recursiva(t, a, b, num_lados):
+    if num_lados == 0:  # Caso base: quando não há mais lados para desenhar
+        return
+    
+    t.circle(b * 3, 90)  # Desenha um arco com o raio correspondente ao número de Fibonacci
+    
+    # Chamada recursiva para o próximo arco na sequência
+    espiral_fibonacci_recursiva(t, b, a + b, num_lados - 1)
 
-# Função para desenhar a espiral de Fibonacci
-def espiral_fibonacci(num_lados):
-    t = turtle.Turtle()
-    t.speed(10)
-    
-    # Inicializando os dois primeiros números da sequência de Fibonacci
-    a, b = 0, 1
-    
-    for i in range(num_lados):
-        # Desenha um arco com o raio correspondente ao número de Fibonacci
-        arco_fibonacci(t, b * 3, 90) 
-        a, b = b, a + b  # Avança na sequência de Fibonacci
-    
-    turtle.done()
+# Configuração inicial
+t = turtle.Turtle()
+t.speed(10)
 
-espiral_fibonacci(12)
+# Chamada da função recursiva
+espiral_fibonacci_recursiva(t, 0, 1, 12)
+
+turtle.done()
